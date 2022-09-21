@@ -154,23 +154,23 @@ int main(int argc, char **argv)
     clear_cache();
 
 #ifndef MIXED
-    // Search
-//     clock_gettime(CLOCK_MONOTONIC, &start);
-// #pragma omp parallel num_threads(n_threads)
-//     {
-// #pragma omp for schedule(static)
-//         for (int i = 0; i < half_num_data; ++i)
-//         {
-//             bt->btree_search(keys[i]);
-//         }
-//     }
-//     clock_gettime(CLOCK_MONOTONIC, &end);
-//     elapsedTime =
-//         (end.tv_sec - start.tv_sec) * 1000000000 + (end.tv_nsec - start.tv_nsec);
-//     cout << "Concurrent searching with " << n_threads
-//          << " threads (Kops) : " << (half_num_data * 1000000) / elapsedTime << endl;
+     Search
+     clock_gettime(CLOCK_MONOTONIC, &start);
+ #pragma omp parallel num_threads(n_threads)
+     {
+ #pragma omp for schedule(static)
+         for (int i = 0; i < half_num_data; ++i)
+         {
+             bt->btree_search(keys[i]);
+         }
+     }
+     clock_gettime(CLOCK_MONOTONIC, &end);
+     elapsedTime =
+         (end.tv_sec - start.tv_sec) * 1000000000 + (end.tv_nsec - start.tv_nsec);
+     cout << "Concurrent searching with " << n_threads
+          << " threads (Kops) : " << (half_num_data * 1000000) / elapsedTime << endl;
 
-//     clear_cache();
+     clear_cache();
 
     // Insert
     // write_cnt = 0;
