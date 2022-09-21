@@ -121,7 +121,7 @@ int main(int argc, char **argv)
     entry_key_t *keys = new entry_key_t[numData];
 
     ifstream ifs;
-    ifs.open("../sample_input.txt");
+    ifs.open("sample_input.txt");
 
     if (!ifs)
     {
