@@ -154,7 +154,7 @@ int main(int argc, char **argv)
     clear_cache();
 
 #ifndef MIXED
-     Search
+    // Search
      clock_gettime(CLOCK_MONOTONIC, &start);
  #pragma omp parallel num_threads(n_threads)
      {
