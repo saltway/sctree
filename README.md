@@ -18,7 +18,7 @@ the major compiling flags include -lpmemobj -mrtm
 
 for example, run the commands as following
 
-./generator
+./generator (need several minutes)
 
 g++  sctree.cpp -o sctree -std=c++11 -lpmemobj -mrtm -fopenmp -O3
 
