@@ -102,8 +102,6 @@ int main(int argc, char **argv)
         bt = D_RW(tree);
         pmemobj_ctl_set(pop, "heap.alloc_class.new.desc", &leaf_class);
         pmemobj_ctl_set(pop, "heap.alloc_class.new.desc", &inner_class);
-
-#ifdef RECOVER
         cout << "data exists and begin recovering" << endl;
         cout << "current version : " << bt->version << endl;
         clock_gettime(CLOCK_MONOTONIC, &start);
@@ -112,7 +110,6 @@ int main(int argc, char **argv)
         elapsedTime =
             (end.tv_sec - start.tv_sec) * 1000000000 + (end.tv_nsec - start.tv_nsec);
         cout << "recovered in  " << elapsedTime / 1000 << " us" << endl;
-#endif
     }
 
 #endif
