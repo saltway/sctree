@@ -1374,33 +1374,13 @@ public:
     while (current)
     {
       
-    // Retry:
-    //   // puts("leaf0");
-    //   if (_xbegin() != _XBEGIN_STARTED)
-    //   {
-    //     goto Retry;
-    //   }
-    //   _xend();
+     Retry:
+       if (_xbegin() != _XBEGIN_STARTED)
+       {
+         goto Retry;
+       }
       uint64_t temp_result[15];
       int temp_off = 0;
-      //   if (hdr.timestamp != bt->version)
-      //   {
-      //     hdr.timestamp = bt->version;
-      //     hdr.lock = 0;
-      //   }
-      //   _xend();
-      // Retry1:
-      //   if (_xbegin() != _XBEGIN_STARTED)
-      //   {
-      //     goto Retry1;
-      //   }
-      //   if (hdr.lock)
-      //   {
-      //     _xabort(1);
-      //     goto Retry1;
-      //   }
-      //   hdr.lock = 1;
-      //   _xend();
       entry_key_t tmp_key;
       entry_key_t max_key = 0;
       char *tmp_ptr;
@@ -1425,10 +1405,7 @@ public:
             // result[off++] = (uint64_t)(current->records[i].ptr);
             if (off + temp_off >= number)
             {
-              // puts("end scan with enough number");
-              // hdr.lock = 0;
-              // printf("the searched number is %d and the node accessed is %d\n", off, node_cnt);
-              // _xend();
+              _xend();
               permutate(temp_result, temp_off);
              memcpy(&result[off], temp_result, (temp_off) * 8);
               
@@ -1438,6 +1415,7 @@ public:
           }
         }
       }
+        _xend();
       if (max_key >= max)
       {
         // hdr.lock = 0;
