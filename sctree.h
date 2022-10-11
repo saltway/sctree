@@ -255,6 +255,7 @@ public:
     last_index = -1;
     is_deleted = false;
     lowest = 0;
+    lock = 0;
     highest = ULONG_MAX;
   }
 
