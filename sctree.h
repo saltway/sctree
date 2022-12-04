@@ -1150,11 +1150,11 @@ public:
 
   char *linear_search(entry_key_t key, PMEMobjpool *pop)
   {
-
-    // if (_xbegin() != _XBEGIN_STARTED)
-    // {
-    //   goto Retry;
-    // }
+    Retry:
+    if (_xbegin() != _XBEGIN_STARTED)
+     {
+       goto Retry;
+     }
     char *ret = NULL;
     char *t;
     entry_key_t k;
@@ -1185,9 +1185,9 @@ public:
 
     if (ret)
     {
-      // _xend();
       if (hdr.lock != pos + 2)
       {
+        _xend();
         return ret;
       }
       
@@ -1195,7 +1195,7 @@ public:
     pos = hdr.lock - 2 - leaf_cardinality;
     if (pos >= 0 && records[pos].key == key)
     {
-      
+      _xend();
       return records[pos].ptr;
     }
     TOID(leaf_page)
@@ -1203,12 +1203,12 @@ public:
     sibling.oid.off = meta0.sibling_ptr;
     if ((t = (char *)meta0.sibling_ptr) && key >= highest)
     {
+      _xend();
       return t;
     }
     // pthread_rwlock_unlock(lock_v);
     // pmemobj_rwlock_unlock(pop, lock_pointer);
-    // _xend();
-    
+    _xend();
     return NULL;
   }
   void remove(btree *bt, entry_key_t key)
