@@ -14,7 +14,7 @@ sc-tree provides the same interfaces as FAST&FAIR
 
 the major compiling flags include -lpmemobj -mrtm 
 
--fopenmp is needed in compliling sctree.cpp
+-fopenmp is needed in compiling sctree.cpp
 
 for example, run the commands as following
 
